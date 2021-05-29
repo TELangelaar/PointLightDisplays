@@ -134,7 +134,7 @@ toc
 end
 
 function plot_inspection(data, hipMiddle, shoulderMiddle, backangle)
-import matlib.array.flatmat
+import helpers.flatmat
 viewparams = [120 30];
 
 xlims = [min(flatmat(data(:,1,:))), max(flatmat(data(:,1,:)))];
