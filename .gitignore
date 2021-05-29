@@ -1,2 +1,5 @@
 #ignore in- and output data
 /*.avi
+/*.mat
+#ignore auto-saved files
+/*.asv

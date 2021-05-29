@@ -1,0 +1,5 @@
+
+1. Transform hip and shoulder markers based on back angle
+2. Create PLDs from data and export to avi
+
+3. Create experiment in Gorilla
