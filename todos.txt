@@ -1,5 +1,5 @@
 
-1. Transform hip and shoulder markers based on back angle
-2. Create PLDs from data and export to avi
+DONE: 1. Transform hip and shoulder markers based on back angle
+READY: 2. Create PLDs from data and export to avi
 
-3. Create experiment in Gorilla
+TODO: 3. Create experiment in Gorilla
