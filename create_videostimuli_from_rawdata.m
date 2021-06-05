@@ -3,11 +3,11 @@ function create_videostimuli_from_rawdata(filename)
 %used in perceptual experiments
 %   Detailed explanation goes here
 
-if nargin <1, filename='prelim'; end
+if nargin <1, filename= "prelim"; end
 
-full_filename = strcat(filename, '.mat');
-if exists(full_filename, 'file') == 2
-    load(full_filename, 'data_post');
+full_filename = strcat(filename, ".mat");
+if exists(full_filename, "file") == 2
+    load(full_filename, "data_post");
 else
     error("Unable to locate '%s'. \nClosing...\n", full_filename);
 end

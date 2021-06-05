@@ -27,7 +27,7 @@ set(gcf,'PaperPosition',[0 0 resolution(1) resolution(2)]/420);
 
 set(gca,'Position',[0 0 1 1])
 
-v = VideoWriter(strcat('output_videos/', filename, '.avi'));
+v = VideoWriter(strcat("output_videos/", filename, ".avi"));
 v.FrameRate = 100;
 v.Quality = 95;
 open(v)
