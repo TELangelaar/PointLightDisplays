@@ -6,7 +6,7 @@ function create_videostimuli_from_rawdata(filename)
 if nargin <1, filename= "prelim"; end
 
 full_filename = strcat(filename, ".mat");
-if exists(full_filename, "file") == 2
+if exist(full_filename, "file") == 2
     load(full_filename, "data_post");
 else
     error("Unable to locate '%s'. \nClosing...\n", full_filename);
