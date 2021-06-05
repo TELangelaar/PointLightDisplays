@@ -1,4 +1,4 @@
-function v = write_video(data)
+function v = write_video(data, filename)
 
 resolution = [1280 720];
 marker_size = 50;
@@ -27,7 +27,7 @@ set(gcf,'PaperPosition',[0 0 resolution(1) resolution(2)]/420);
 
 set(gca,'Position',[0 0 1 1])
 
-v = VideoWriter('test.avi');
+v = VideoWriter(strcat('output_videos/', filename, '.avi'));
 v.FrameRate = 100;
 v.Quality = 95;
 open(v)
