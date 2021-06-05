@@ -13,13 +13,12 @@ else
 end
 
 %%
-states = {"Neutral", "Happy", "Sad", "Angry"};
+states = {'Neutral', 'Happy', 'Sad', 'Angry'};
 
 import helpers.write_video
 for i = 1:size(data_post, 1)
     for j = 1:size(data_post, 2)
-        filename = "pp" + i + "_" + states{j};
-        write_video(squeeze(data_post(i, j, :, :, :)), filename);
+        write_video(squeeze(data_post(i, j, :, :, :)), i, states{j});
     end
 end
 
