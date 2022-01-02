@@ -3,6 +3,7 @@
 **/*.mat
 **/*.mp4
 **/*.png
+**/*.csv
 #ignore auto-saved files
 **/*.asv
 #ignore weird vim files
