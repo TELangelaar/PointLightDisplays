@@ -1,4 +1,4 @@
-function mainscript(do_plot, do_plot2)
+function [data, data_post, backangle, backangle_post, hip, shoulder] = mainscript(do_change_C7_and_headmarkers, do_plot, do_plot2)
 % MAINSCRIPT This script performs the main computations and transformations
 % for the Point-Light-Displays.
 % MAINSCRIPT(true) plots a random participant for the unmodified data
@@ -9,8 +9,9 @@ function mainscript(do_plot, do_plot2)
 clc;
 close all;
 
-if nargin<2, do_plot2=false; end
-if nargin<1, do_plot=false; end
+if nargin<3, do_plot2=false; end
+if nargin<2, do_plot=false; end
+if nargin<1, do_change_C7_and_headmarkers=true; end
 
 pp = -1;
 state = -1;
@@ -88,9 +89,14 @@ n_time = size(data,5);
 
 hip_R_marker = 3;    %marker locations come from the Gait.dbbuild.get_conf function
 hip_L_marker = 6;
+hip_Middle_marker = 7;
+
+head_R_marker = 9;
+head_L_marker = 10;
 
 shoulder_R_marker = 11;
 shoulder_L_marker = 14;
+shoulder_C7_marker = 8;
 
 padding = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"; %for printing purposes
 
@@ -147,7 +153,7 @@ for i = 1:n_states
 end
 disp(txt1); %average backangle is ~11deg for neutral & happy, ~13 for sad and angry
 
-% exploratory step 2: decrease the backangle by 5 degrees and calculate y'
+% exploratory step 2: decrease the backangle by 7 degrees and calculate y'
 % requirements:
 %   - Z (height) should stay the same; the trunk 'height' should be equal
 %   compared to pre-transformation
@@ -179,16 +185,29 @@ data_post = data;
 
 data_post(:, :, hip_R_marker, 2, :) = squeeze(data(:, :, hip_R_marker, 2, :)) + half_y_diff;
 data_post(:, :, hip_L_marker, 2, :) = squeeze(data(:, :, hip_L_marker, 2, :)) + half_y_diff;
+data_post(:, :, hip_Middle_marker, 2, :) = squeeze(data(:, :, hip_Middle_marker, 2, :)) + half_y_diff;
             
 data_post(:, :, shoulder_R_marker, 2, :) = squeeze(data(:, :, shoulder_R_marker, 2, :)) - half_y_diff;
 data_post(:, :, shoulder_L_marker, 2, :) = squeeze(data(:, :, shoulder_L_marker, 2, :)) - half_y_diff;
 
+if do_change_C7_and_headmarkers
+    data_post(:, :, shoulder_C7_marker, 2, :) = squeeze(data(:, :, shoulder_C7_marker, 2, :)) - half_y_diff;
+    data_post(:, :, head_R_marker, 2, :) = squeeze(data(:, :, head_R_marker, 2, :)) - half_y_diff;
+    data_post(:, :, head_L_marker, 2, :) = squeeze(data(:, :, head_L_marker, 2, :)) - half_y_diff;
+end
+
 % step 3.1: compute new backvector for verification purposes
 [backangle_post, backvector_post, hip_middle_calculated_new, shoulder_middle_calculated_new] = calculate_backangle_backvector(data_post);
 
+hip(:,:,:,:,1) = hip_middle_calculated;
+hip(:,:,:,:,2) = hip_middle_calculated_new;
+
+shoulder(:,:,:,:,1) = shoulder_middle_calculated;
+shoulder(:,:,:,:,2) = shoulder_middle_calculated_new;
+
 save('prelim.mat', 'backangle', 'backangle_post', ...
     'data', 'data_post', 'backvector', 'backvector_post',...
-    'y_diff');
+    'y_diff', 'hip', 'shoulder');
 
 if ~do_plot && do_plot2
 %For inspection purposes; plot a random participant and state in blue, with

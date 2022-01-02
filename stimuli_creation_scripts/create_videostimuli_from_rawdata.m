@@ -13,7 +13,7 @@ else
 end
 
 %%
-states = {'Neutral', 'Happy', 'Sad', 'Angry'};
+states = {'neutral', 'happy', 'sad', 'angry'};
 
 import helpers.write_video
 for i = 1:size(data_post, 1)

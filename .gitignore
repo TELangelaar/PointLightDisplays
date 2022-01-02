@@ -1,6 +1,8 @@
 #ignore in- and output data
 **/*.avi
 **/*.mat
+**/*.mp4
+**/*.png
 #ignore auto-saved files
 **/*.asv
 #ignore weird vim files
